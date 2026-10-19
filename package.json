@@ -1,0 +1,49 @@
+{
+  "name": "talent-review",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:web": "WATCHPACK_POLLING=1000 npm run dev --workspace @talent-review/web -- --hostname 127.0.0.1 --port 3002 --webpack",
+    "dev:api": "cd apps/api && uv run uvicorn talent_api.main:app --reload --host 127.0.0.1 --port 8000",
+    "db:up": "docker compose up -d --wait db",
+    "db:migrate": "cd apps/api && uv run alembic upgrade head",
+    "check:web": "npm run typecheck --workspace @talent-review/web",
+    "build": "npm run build --workspace @talent-review/web",
+    "test:api": "cd apps/api && uv run pytest",
+    "verify:scoring": "cd apps/api && uv run python -m talent_api.verify_scoring",
+    "test:db": "cd apps/api && RUN_DB_TESTS=1 uv run pytest tests/test_database.py tests/test_import_pack.py tests/test_worker.py tests/test_candidate_api.py tests/test_hr_api.py",
+    "data:import": "cd apps/api && uv run python -m talent_api.import_pack",
+    "worker": "cd apps/api && uv run python -m talent_api.worker run",
+    "jobs:status": "cd apps/api && uv run python -m talent_api.worker status",
+    "jobs:retry": "cd apps/api && uv run python -m talent_api.worker retry",
+    "candidate:invite": "cd apps/api && uv run python -m talent_api.invite_candidate",
+    "test:web": "npm run test --workspace @talent-review/web",
+    "format": "npm run format:web && npm run format:api",
+    "format:check": "npm run format:check:web && npm run format:check:api",
+    "format:web": "prettier --write .",
+    "format:api": "cd apps/api && uv run ruff format .",
+    "format:check:web": "prettier --check .",
+    "format:check:api": "cd apps/api && uv run ruff format --check .",
+    "lint": "npm run lint:web && npm run lint:api",
+    "lint:fix": "npm run lint:fix:web && npm run lint:fix:api",
+    "lint:web": "eslint . --max-warnings 0",
+    "lint:api": "cd apps/api && uv run ruff check .",
+    "lint:fix:web": "eslint . --fix --max-warnings 0",
+    "lint:fix:api": "cd apps/api && uv run ruff check --fix .",
+    "check": "npm run format:check && npm run lint && npm run check:web",
+    "dev": "concurrently --kill-others-on-fail --names web,api --prefix-colors cyan,green \"npm:dev:web\" \"npm:dev:api\"",
+    "test": "npm run test:web && npm run test:api",
+    "verify": "npm run check && npm run test:web && npm run test:api && npm run test:db && npm run build"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "9.2.5",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.1",
+    "prettier": "3.9.10"
+  }
+}
