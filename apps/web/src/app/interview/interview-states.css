@@ -1,0 +1,148 @@
+.check-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--positive-bg);
+  color: var(--green);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.check-icon.large {
+  width: 56px;
+  height: 56px;
+  font-size: 27px;
+  background: var(--positive-bg);
+  margin-bottom: 27px;
+}
+.error-notice {
+  border: 1px solid var(--warning-border);
+  background: var(--warning-bg);
+  color: var(--warning-text);
+  border-radius: 6px;
+  padding: 13px 15px;
+  margin: 15px 24px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.error-notice > span {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+}
+.state-card {
+  padding: 45px 0;
+  max-width: 610px;
+}
+.state-card h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 43px;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -1.5px;
+  margin: 19px 0;
+}
+.state-card > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 500px;
+}
+.state-card > .primary-button {
+  margin-top: 15px;
+}
+.state-card .error-notice {
+  margin: 18px 0;
+}
+.receipt-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--line);
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--surface);
+  margin: 25px 0;
+  font-size: 12px;
+}
+.receipt-details > span:last-child {
+  font-size: 10px;
+  color: var(--muted);
+}
+.completion-list {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 8px 19px;
+  background: var(--surface);
+  margin-top: 27px;
+}
+.completion-list > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+}
+.completion-list > div:last-child {
+  border: 0;
+}
+.completion-list strong {
+  font-weight: 500;
+}
+.completion-list > div > span:last-child {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 10px;
+}
+.saved-receipts {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 22px 0;
+}
+.saved-receipts summary {
+  cursor: pointer;
+}
+.saved-receipts ul {
+  list-style: none;
+  padding: 0;
+}
+.saved-receipts li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.loading-dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 720px) {
+  .error-notice {
+    margin: 15px 18px;
+  }
+  .state-card {
+    padding: 20px 0;
+  }
+  .state-card h1 {
+    font-size: 36px;
+  }
+  .state-card > .primary-button {
+    width: 100%;
+  }
+  .saved-receipts li {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
